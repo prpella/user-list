@@ -2,9 +2,6 @@ import React from 'react'
 import TimeAgo from 'react-timeago'
 import './App.css'
 
-
-//const request = require('request')
-
 class App extends React.Component {
   
   render () {
@@ -70,14 +67,6 @@ class User extends React.Component {
       })
     }
     
-// Username
-// return fetch('/api/profiles?ids=' + user.id)
-
-// Age
-// Image
-// Location and distance
-// Headline
-// Relative last login time (e.g. 6 minutes ago)
 
   render() {
     return (
