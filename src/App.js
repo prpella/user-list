@@ -15,24 +15,23 @@ class App extends React.Component {
   }
 }
 
-console.log()
-
 const UserList = () => {
 
   return (
-    <ul>
-      <li>
-        <User />
-      </li>
-    </ul>
+    <div id="user-list">
+      <User />
+    </div>
+        
+    
   )
 }
 
 class User extends React.Component {
   constructor() {
     super()
+    this.componentDidMount = this.componentDidMount.bind(this)
     this.state = {
-      userName: []
+      userData: []
     }
   }
 
@@ -44,15 +43,16 @@ class User extends React.Component {
       console.log(data)
         const users = data.items.filter((item) => item)
         console.log('users ', users)
-        const userName = users.map((user)=>{
+        const userData = users.map((user)=>{
           return (
             <ul>
-              <li>{user.name}</li>
+              <li key={user.id + 1}>{user.name}</li>
+              <li key={user.id + 2}>{user.online_status}</li>
             </ul>
           )
         })
-        this.setState({userName})  
-        console.log('state', this.state.userName)
+        this.setState({userData: userData})  
+        console.log('state', this.state.userData)
       })
     }
     
@@ -60,7 +60,7 @@ class User extends React.Component {
   render() {
     return (
       <div className="user-wrapper">
-        {this.state.userName}
+        {this.state.userData}
       </div>
     )
   }
