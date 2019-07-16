@@ -24,25 +24,48 @@
 }
 
 main {
-  display: flex;
+  margin: 0;
 }
 
 #user-list {
-  display: flex;
-  background-color: antiquewhite;
-  margin: 10px;
+  background-color: #282c34;
   padding: 10px;
 }
 
 .user-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0.35em;
+  margin: 2px;
+  background-color: white;
 }
 
 li {
   list-style: none;
 }
 
+.profile-image {
+  width: 45;
+  height: auto;
+}
+
+@media all and (min-width: 30em) {
+  .profile-card {
+    width: 50%;
+  }
+}
+@media all and (min-width: 50em) {
+  .profile-card {
+    width: 33.33%;
+  }
+}
 
 @keyframes App-logo-spin {
   from {

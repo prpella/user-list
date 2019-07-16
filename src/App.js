@@ -1,5 +1,6 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import TimeAgo from 'react-timeago'
+import './App.css'
 
 
 //const request = require('request')
@@ -40,22 +41,28 @@ class User extends React.Component {
     .then(results => {
       return results.json()
     }).then(data => {
-      console.log(data)
         const users = data.items.filter((item) => item)
-        console.log('users ', users)
         const userData = users.map((user)=>{
+          console.log(user)
           return (
-            <ul>
-              <li key={user.id + 1}>{user.name}</li>
-              <li key={user.id + 2}>{user.online_status}</li>
-            </ul>
+            <div className="profile-card">
+              <div className="profile-header">Headline</div>
+              <img className="profile-image" alt={user.name}></img>
+              <div className="profile-body">
+                <p>{user.name}</p>
+                <div>
+                  Last Login: 
+                  <TimeAgo date={user.last_login} />
+                </div>
+              </div>
+            </div>
           )
         })
         this.setState({userData: userData})  
-        console.log('state', this.state.userData)
       })
     }
     
+
 
   render() {
     return (
