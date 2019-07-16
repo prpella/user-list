@@ -38,16 +38,24 @@ class User extends React.Component {
 
   componentDidMount() {
     fetch('/api/search?length=32')
-    .then(results => {
-      return results.json()
-    }).then(data => {
-        const users = data.items.filter((item) => item)
-        const userData = users.map((user)=>{
+    .then(results => results.json())
+    .then(data => {
+      const userIds = data.items.map(user => user.id)
+      const userIdsParams = userIds.map(id => 'ids=' + id).join('&')
+      const profiles = fetch('/api/profiles?' + userIdsParams)
+      .then(results => results.json())
+      console.log(data)
+      console.log(profiles)
+      return {users: data.items, profiles}
+    })
+    .then(data => {
+        const userData = data.items.map((user)=>{
+          //fetch('/api/profiles?ids=' + user.id)
           console.log(user)
           return (
-            <div className="profile-card">
+            <div className="profile-card" key="{user.id}">
               <div className="profile-header">Headline</div>
-              <img className="profile-image" alt={user.name}></img>
+              {user.picture && user.picture.url && <img className="profile-image" src={user.picture.url} alt={user.name} />}
               <div className="profile-body">
                 <p>{user.name}</p>
                 <div>
@@ -62,7 +70,14 @@ class User extends React.Component {
       })
     }
     
+// Username
+// return fetch('/api/profiles?ids=' + user.id)
 
+// Age
+// Image
+// Location and distance
+// Headline
+// Relative last login time (e.g. 6 minutes ago)
 
   render() {
     return (
