@@ -36,28 +36,35 @@ class User extends React.Component {
   componentDidMount() {
     fetch('/api/search?length=32')
     .then(results => results.json())
-    .then(data => {
-      const userIds = data.items.map(user => user.id)
+    .then(userData => {
+      const userIds = userData.items.map(user => user.id)
       const userIdsParams = userIds.map(id => 'ids=' + id).join('&')
-      const profiles = fetch('/api/profiles?' + userIdsParams)
+      const userDetails = fetch('/api/profiles?' + userIdsParams)
       .then(results => results.json())
-      console.log(data)
-      console.log(profiles)
-      return {users: data.items, profiles}
+      .then(profileData => {
+        return profileData.map((profile) => {
+          const id = profile.id
+          const user = userData.items.find((user) => user.id === id)
+          console.log(id, user, profile)
+          return {id, profile, user}
+        })
+      })
+      console.log(userDetails)
+      return userDetails
     })
     .then(data => {
-        const userData = data.items.map((user)=>{
-          //fetch('/api/profiles?ids=' + user.id)
+      console.log('data', data)
+        const userData = data.map((user)=>{
           console.log(user)
           return (
             <div className="profile-card" key="{user.id}">
               <div className="profile-header">Headline</div>
-              {user.picture && user.picture.url && <img className="profile-image" src={user.picture.url} alt={user.name} />}
+              {user.user.picture && user.user.picture.url && <img className="profile-image" src={user.user.picture.url} alt={user.user.name} />}
               <div className="profile-body">
-                <p>{user.name}</p>
+                <p>{user.user.name}</p>
                 <div>
                   Last Login: 
-                  <TimeAgo date={user.last_login} />
+                  <TimeAgo date={user.user.last_login} />
                 </div>
               </div>
             </div>
