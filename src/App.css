@@ -58,6 +58,10 @@ li {
   margin-bottom: 3px;
 }
 
+.profile-body {
+  margin-top: auto;
+}
+
 @media all and (min-width: 10em) {
   .profile-card {
     width: 100%;

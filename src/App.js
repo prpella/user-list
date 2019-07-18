@@ -60,8 +60,8 @@ class User extends React.Component {
             <div className="profile-card" key={userDetails.id}>
               <p>{userDetails.user.name}</p>
               {userDetails.user.picture && userDetails.user.picture.url && <img className="profile-image" src={userDetails.user.picture.url} alt={userDetails.user.name} />}
-              <div className="profile-header">{userDetails.profile.headline}</div>
               <div className="profile-body">
+                <p className="profile-header">{userDetails.profile.headline}</p>
                 <p>Age: {userDetails.profile.personal.age}</p>
                 <div>
                   Last Login: 
