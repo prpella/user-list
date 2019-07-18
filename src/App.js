@@ -54,17 +54,21 @@ class User extends React.Component {
     })
     .then(data => {
       console.log('data', data)
-        const userData = data.map((user)=>{
-          console.log(user)
+        const userData = data.map((userDetails)=>{
+          console.log(userDetails)
           return (
-            <div className="profile-card" key="{user.id}">
-              <div className="profile-header">Headline</div>
-              {user.user.picture && user.user.picture.url && <img className="profile-image" src={user.user.picture.url} alt={user.user.name} />}
+            <div className="profile-card" key="{userDetails.id}">
+              <p>{userDetails.user.name}</p>
+              {userDetails.user.picture && userDetails.user.picture.url && <img className="profile-image" src={userDetails.user.picture.url} alt={userDetails.user.name} />}
+              <div className="profile-header">{userDetails.profile.headline}</div>
               <div className="profile-body">
-                <p>{user.user.name}</p>
+                <p>Age: {userDetails.profile.personal.age}</p>
                 <div>
                   Last Login: 
-                  <TimeAgo date={user.user.last_login} />
+                  <TimeAgo date={userDetails.user.last_login} />
+                </div>
+                <div>
+                  Location: {userDetails.profile.location.area}, {userDetails.profile.location.country}, {userDetails.profile.location.distance}km
                 </div>
               </div>
             </div>
