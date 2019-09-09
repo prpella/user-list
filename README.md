@@ -1,3 +1,8 @@
+# About
+This was a trial task I did with only little React knowledge within a short period of time.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
